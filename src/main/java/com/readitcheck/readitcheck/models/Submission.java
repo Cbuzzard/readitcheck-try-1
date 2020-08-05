@@ -1,8 +1,5 @@
 package com.readitcheck.readitcheck.models;
 
-import com.mysql.cj.protocol.x.XProtocol;
-import org.springframework.beans.factory.annotation.Required;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
