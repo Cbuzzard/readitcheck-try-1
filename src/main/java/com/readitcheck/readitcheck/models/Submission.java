@@ -17,7 +17,7 @@ public class Submission {
     @NotEmpty(message = "Title cannot be empty")
     private String title;
     @Size(min = 3, max = 20, message = "Author must be between 3 and 20 characters")
-    @NotEmpty(message = "Author cannot be empty")
+    @NotEmpty(message = "Username cannot be empty")
     private String author;
     @Pattern(regexp = "https?:\\/\\/(www\\.)[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,4}\\b([-a-zA-Z0-9@:%_\\+.~#?&//=]*)", message = "Link needs to be in https://www format")
     @NotEmpty(message = "Link cannot be empty")
