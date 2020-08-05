@@ -3,8 +3,7 @@ package com.readitcheck.readitcheck.models;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 
 @Entity
 public class Commenter {
@@ -15,7 +14,7 @@ public class Commenter {
     @Size(min = 3, max = 20, message = "Author must be between 3 and 20 characters")
     @NotEmpty(message = "Username cannot be empty")
     private String username;
-    @NotEmpty
+    @Min(1)
     private int submissionId;
 
     public Commenter(String username, int submissionId) {
