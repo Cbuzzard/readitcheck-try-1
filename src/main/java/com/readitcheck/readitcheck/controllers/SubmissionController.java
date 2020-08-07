@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController("submission")
+@RestController()
 public class SubmissionController {
 
     private final SubmissionRepository repository;
@@ -15,18 +15,20 @@ public class SubmissionController {
         this.repository = repository;
     }
 
-    @GetMapping
-    List<Submission> all() {
-        return repository.findAll();
+    @GetMapping("submission")
+    public List<Submission> all(@RequestParam(required = false) String title, @RequestParam(required = false) String author) {
+        return title!=null && author!=null ? repository.findByTitleAndAuthorIgnoreCase(title, author) : repository.findAll();
     }
 
-    @GetMapping("/{id}")
-    Submission one(@PathVariable Integer id) {
+    //TODO fix or else throw
+
+    @GetMapping("submission/{id}")
+    public Submission one(@PathVariable Integer id) {
         return repository.findById(id).orElseThrow();
     }
 
-    @PostMapping
-    Submission newSubmission(@RequestBody Submission submission) {
+    @PostMapping("submission")
+    public Submission newSubmission(@RequestBody Submission submission) {
         return repository.save(submission);
     }
 
