@@ -10,6 +10,6 @@ import java.util.List;
 @Repository
 public interface SubmissionRepository extends JpaRepository<Submission, Integer> {
 
-    List<Submission> findByTitleAndAuthorIgnoreCase(String title, String author);
+    Submission findFirstByTitleAndAuthorIgnoreCase(String title, String author);
 
 }

@@ -2,29 +2,48 @@ package com.readitcheck.readitcheck.controllers;
 
 import com.readitcheck.readitcheck.data.SubmissionRepository;
 import com.readitcheck.readitcheck.models.Submission;
+import com.readitcheck.readitcheck.models.assembler.SubmissionModelAssembler;
+import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.EntityModel;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController()
 public class SubmissionController {
 
     private final SubmissionRepository repository;
+    private final SubmissionModelAssembler assembler;
 
-    public SubmissionController(SubmissionRepository repository) {
+    public SubmissionController(SubmissionRepository repository, SubmissionModelAssembler assembler) {
         this.repository = repository;
+        this.assembler = assembler;
     }
 
     @GetMapping("submission")
-    public List<Submission> all(@RequestParam(required = false) String title, @RequestParam(required = false) String author) {
-        return title!=null && author!=null ? repository.findByTitleAndAuthorIgnoreCase(title, author) : repository.findAll();
+    public CollectionModel<EntityModel<Submission>> all() {
+
+        List<EntityModel<Submission>> submissions = repository.findAll().stream()
+                .map(assembler::toModel)
+                .collect(Collectors.toList());
+
+        return CollectionModel.of(submissions,
+                linkTo(methodOn(SubmissionController.class).all()).withSelfRel());
+    }
+
+    @GetMapping(value = "submission", params = {"title", "author"})
+    public EntityModel<Submission> bySubmissionId(@RequestParam(required = false) String title, @RequestParam(required = false) String author) {
+        Submission submission = repository.findFirstByTitleAndAuthorIgnoreCase(title, author);
+        return assembler.toModel(submission);
     }
 
     //TODO fix or else throw
-
     @GetMapping("submission/{id}")
-    public Submission one(@PathVariable Integer id) {
-        return repository.findById(id).orElseThrow();
+    public EntityModel<Submission> one(@PathVariable Integer id) {
+        Submission submission = repository.findById(id).orElseThrow();
+        return assembler.toModel(submission);
     }
 
     @PostMapping("submission")
