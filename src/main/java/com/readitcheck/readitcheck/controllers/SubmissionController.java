@@ -5,11 +5,12 @@ import com.readitcheck.readitcheck.models.Submission;
 import com.readitcheck.readitcheck.models.assembler.SubmissionModelAssembler;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController()
 public class SubmissionController {
@@ -34,7 +35,7 @@ public class SubmissionController {
     }
 
     @GetMapping(value = "submission", params = {"title", "author"})
-    public EntityModel<Submission> bySubmissionId(@RequestParam(required = false) String title, @RequestParam(required = false) String author) {
+    public EntityModel<Submission> byTitleAndAuthor(@RequestParam(required = false) String title, @RequestParam(required = false) String author) {
         Submission submission = repository.findFirstByTitleAndAuthorIgnoreCase(title, author);
         return assembler.toModel(submission);
     }
