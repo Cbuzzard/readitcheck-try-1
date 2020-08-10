@@ -19,7 +19,7 @@ public class CommenterTest {
     private Commenter commenter = new Commenter();
 
     @BeforeEach
-    public void setUp() {
+    public void setup() {
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         validator = factory.getValidator();
     }
