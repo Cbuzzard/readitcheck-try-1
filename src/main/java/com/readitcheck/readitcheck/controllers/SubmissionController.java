@@ -36,7 +36,7 @@ public class SubmissionController {
 
     @GetMapping(value = "submission", params = {"title", "author"})
     public EntityModel<Submission> byTitleAndAuthor(@RequestParam(required = false) String title, @RequestParam(required = false) String author) {
-        Submission submission = repository.findFirstByTitleAndAuthorIgnoreCase(title, author);
+        Submission submission = repository.findFirstByTitleIgnoreCaseAndAuthorIgnoreCase(title, author);
         return assembler.toModel(submission);
     }
 

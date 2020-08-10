@@ -6,7 +6,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 
 import java.util.List;
 
@@ -18,9 +17,6 @@ public class CommenterRepositoryTest {
 
     @Autowired
     private CommenterRepository repository;
-
-    @Autowired
-    private TestEntityManager entityManager;
 
     private static Commenter testCommenter;
 
@@ -57,7 +53,9 @@ public class CommenterRepositoryTest {
     @Test
     public void findBySubmissionIdShouldFindCommenter() {
         List<Commenter> commenters = repository.findBySubmissionId(testCommenter.getSubmissionId());
-        assertThat(commenters).hasSize(1).contains(testCommenter);
+        commenters.forEach(commenter -> {
+            assertThat(commenter).hasFieldOrPropertyWithValue("submissionId", 1);
+        });
     }
 
     @Test
