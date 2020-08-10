@@ -1,4 +1,4 @@
-package com.readitcheck.readitcheck;
+package com.readitcheck.readitcheck.models;
 
 import com.readitcheck.readitcheck.models.Commenter;
 import org.junit.jupiter.api.BeforeEach;

@@ -1,4 +1,4 @@
-package com.readitcheck.readitcheck.models;
+package com.readitcheck.readitcheck.controllers;
 
 import com.readitcheck.readitcheck.data.CommenterRepository;
 import org.junit.jupiter.api.Test;
@@ -21,11 +21,5 @@ public class CommenterControllerTest {
     @Autowired
     private TestRestTemplate restTemplate;
 
-    @Test
-    public void testCreationOfCommenter() {
-        Commenter commenter = new Commenter("corwinnnn", 1);
-        Commenter savedCommenter = repository.save(commenter);
-        assertThat(savedCommenter).isNotEqualTo(null);
-    }
 
 }
