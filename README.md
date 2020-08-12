@@ -1,34 +1,30 @@
 # ReadItCheck Backend
 
-Simple overview of use/purpose.
+REST Api used for CRUD operations for ReadItCheck.com
 
 ## Description
 
-An in-depth paragraph about your project and overview of use.
+Store and retrieve approved commenters and submissions for reddit.com/r/ReadItCheck
 
 ## Getting Started
 
-### Dependencies
+1. Add Environment variables and database url to application.properties
+2. gradle bootRun
 
-* Describe any prerequisites, libraries, OS version, etc., needed before installing program.
-* ex. Windows 10
-
-### Installing
-
-* How/where to download your program
-* Any modifications needed to be made to files/folders
 
 ### Executing program
 
-* How to run the program
-* Step-by-step bullets
 ```
-code blocks for commands
+gradle bootRun
 ```
+
+### Executing Unit Tests
+
+```
+gradle test
+```
+
 
 ## Help
 
-Any advise for common problems or issues.
-```
-command to run if program contains helper info
-```
+Email: Corwin1998@gmail.com
