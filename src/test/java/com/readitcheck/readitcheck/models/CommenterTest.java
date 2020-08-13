@@ -1,6 +1,5 @@
 package com.readitcheck.readitcheck.models;
 
-import com.readitcheck.readitcheck.models.Commenter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
