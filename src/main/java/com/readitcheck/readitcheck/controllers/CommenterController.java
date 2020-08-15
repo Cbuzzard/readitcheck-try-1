@@ -1,5 +1,6 @@
 package com.readitcheck.readitcheck.controllers;
 
+import com.readitcheck.readitcheck.controllers.exceptions.CommenterNotFoundException;
 import com.readitcheck.readitcheck.data.CommenterRepository;
 import com.readitcheck.readitcheck.models.Commenter;
 import com.readitcheck.readitcheck.models.assembler.CommenterModelAssembler;
@@ -45,11 +46,9 @@ public class CommenterController {
                 linkTo(methodOn(CommenterController.class).all()).withSelfRel());
     }
 
-    //TODO fix or else throw
-
     @GetMapping("commenter/{id}")
     public EntityModel<Commenter> one(@PathVariable Integer id) {
-        Commenter commenter = repository.findById(id).orElseThrow();
+        Commenter commenter = repository.findById(id).orElseThrow(() -> new CommenterNotFoundException(id));
         return assembler.toModel(commenter);
     }
 
