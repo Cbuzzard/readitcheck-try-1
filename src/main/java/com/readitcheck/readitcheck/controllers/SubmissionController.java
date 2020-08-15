@@ -1,5 +1,6 @@
 package com.readitcheck.readitcheck.controllers;
 
+import com.readitcheck.readitcheck.controllers.exceptions.SubmissionNotFoundException;
 import com.readitcheck.readitcheck.data.SubmissionRepository;
 import com.readitcheck.readitcheck.models.Submission;
 import com.readitcheck.readitcheck.models.assembler.SubmissionModelAssembler;
@@ -40,10 +41,9 @@ public class SubmissionController {
         return assembler.toModel(submission);
     }
 
-    //TODO fix or else throw
     @GetMapping("submission/{id}")
     public EntityModel<Submission> one(@PathVariable Integer id) {
-        Submission submission = repository.findById(id).orElseThrow();
+        Submission submission = repository.findById(id).orElseThrow(() -> new SubmissionNotFoundException(id));
         return assembler.toModel(submission);
     }
 
