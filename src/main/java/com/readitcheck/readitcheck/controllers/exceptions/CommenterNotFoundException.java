@@ -6,4 +6,8 @@ public class CommenterNotFoundException extends RuntimeException {
         super("Could not find commenter " + id);
     }
 
+    @Override
+    public synchronized Throwable fillInStackTrace() {
+        return this;
+    }
 }
