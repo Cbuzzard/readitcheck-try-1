@@ -52,7 +52,7 @@ public class SubmissionRepositoryTest {
 
     @Test
     public void findByTitleAndAuthorShouldFindSubmission() {
-        Submission submission = repository.findFirstByTitleIgnoreCaseAndAuthorIgnoreCase("testTitle","testUser");
+        Submission submission = repository.findFirstByTitleIgnoreCaseAndAuthorIgnoreCase("testTitle","testUser").orElseThrow();
         assertThat(submission).hasFieldOrPropertyWithValue("title", "TestTitle");
         assertThat(submission).hasFieldOrPropertyWithValue("author", "TestUser");
     }
