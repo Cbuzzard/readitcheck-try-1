@@ -1,15 +1,16 @@
 package com.readitcheck.readitcheck.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.util.List;
 
 @Entity
+@Table(name = "submission")
 public class Submission {
 
     @Id
     @GeneratedValue
+    @Column(name = "id")
     private int id;
     @NotEmpty(message = "Title cannot be empty")
     private String title;
@@ -27,6 +28,8 @@ public class Submission {
     private String questionTwo;
     @NotEmpty(message = "Answer 2 cannot be empty")
     private String answerTwo;
+    @OneToMany(mappedBy = "submission")
+    private List<Commenter> commenters;
 
     public Submission(String title, String author, String linkToArticle, String questionOne, String answerOne, String questionTwo, String answerTwo) {
         this.title = title;

@@ -1,12 +1,12 @@
 package com.readitcheck.readitcheck.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.*;
 
 @Entity
 public class Commenter {
+
+
 
     @Id
     @GeneratedValue
@@ -14,15 +14,17 @@ public class Commenter {
     @Size(min = 3, max = 20, message = "Author must be between 3 and 20 characters")
     @NotEmpty(message = "Username cannot be empty")
     private String username;
-    @Min(1)
-    private int submissionId;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "submission_id", referencedColumnName = "id")
+    private Submission submission;
 
-    public Commenter(String username, int submissionId) {
+
+    public Commenter(String username) {
         this.username = username;
-        this.submissionId = submissionId;
     }
 
-    public Commenter() {}
+    public Commenter() {
+    }
 
     public int getId() {
         return id;
@@ -40,11 +42,11 @@ public class Commenter {
         this.username = username;
     }
 
-    public int getSubmissionId() {
-        return submissionId;
+    public Submission getSubmission() {
+        return submission;
     }
 
-    public void setSubmissionId(int submissionId) {
-        this.submissionId = submissionId;
+    public void setSubmission(Submission submission) {
+        this.submission = submission;
     }
 }
