@@ -1,6 +1,7 @@
 package com.readitcheck.readitcheck.data;
 
 import com.readitcheck.readitcheck.models.Commenter;
+import com.readitcheck.readitcheck.models.Submission;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,9 +21,13 @@ public class CommenterRepositoryTest {
 
     private static Commenter testCommenter;
 
+//    TODO fix commenter constructors
+
     @BeforeAll
     public static void init() {
-        testCommenter = new Commenter("TestUsername", 1);
+        Submission submission = new Submission();
+        submission.setId(1);
+        testCommenter = new Commenter("TestUsername", submission);
     }
 
     @BeforeEach
@@ -39,7 +44,9 @@ public class CommenterRepositoryTest {
 
     @Test
     public void saveCreatesCommenterInDatabase() {
-        Commenter commenter = new Commenter("TestUsername", 1);
+        Submission submission = new Submission();
+        submission.setId(1);
+        Commenter commenter = new Commenter("TestUsername", submission);
         Commenter savedCommenter = repository.save(commenter);
         assertThat(savedCommenter).isEqualTo(commenter);
     }
@@ -50,9 +57,11 @@ public class CommenterRepositoryTest {
         assertThat(commenters).hasSize(1);
     }
 
+    //    TODO fix get submissionId -- something like commenter.getSubmission().getId()
+
     @Test
     public void findBySubmissionIdShouldFindCommenter() {
-        List<Commenter> commenters = repository.findBySubmissionId(testCommenter.getSubmissionId());
+        List<Commenter> commenters = repository.findBySubmissionId(testCommenter.getSubmission().getId());
         commenters.forEach(commenter -> {
             assertThat(commenter).hasFieldOrPropertyWithValue("submissionId", 1);
         });

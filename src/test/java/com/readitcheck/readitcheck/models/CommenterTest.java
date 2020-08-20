@@ -51,11 +51,4 @@ public class CommenterTest {
         assertThat(violations.size()).isEqualTo(1);
     }
 
-    @Test
-    public void oneSubmissionIdShouldBeValid() {
-        commenter.setSubmissionId(1);
-        Set<ConstraintViolation<Commenter>> violations = validator.validate(commenter);
-        assertThat(violations.size()).isEqualTo(1);
-    }
-
 }
