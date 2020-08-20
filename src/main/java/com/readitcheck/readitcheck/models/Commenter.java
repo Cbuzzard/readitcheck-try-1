@@ -19,8 +19,9 @@ public class Commenter {
     private Submission submission;
 
 
-    public Commenter(String username) {
+    public Commenter(String username, Submission submission) {
         this.username = username;
+        this.submission = submission;
     }
 
     public Commenter() {
