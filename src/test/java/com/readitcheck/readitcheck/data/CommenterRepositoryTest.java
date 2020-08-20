@@ -21,8 +21,6 @@ public class CommenterRepositoryTest {
 
     private static Commenter testCommenter;
 
-//    TODO fix commenter constructors
-
     @BeforeAll
     public static void init() {
         Submission submission = new Submission();
@@ -56,8 +54,6 @@ public class CommenterRepositoryTest {
         List<Commenter> commenters = repository.findAll();
         assertThat(commenters).hasSize(1);
     }
-
-    //    TODO fix get submissionId -- something like commenter.getSubmission().getId()
 
     @Test
     public void findBySubmissionIdShouldFindCommenter() {
